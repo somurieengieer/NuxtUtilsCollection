@@ -1,8 +1,26 @@
 <template>
-  <div>
-    <nuxt />
+  <div id="app">
+    <div class="appContainer">
+      <div class="naviContainer">
+        <side-menu/>
+      </div>
+      <div class="mainContainer">
+        <nuxt />
+      </div>
+    </div>
   </div>
 </template>
+
+<script>
+import SideMenu from '@/components/SideMenu'
+
+export default {
+  name: 'app',
+  components: {
+    SideMenu
+  }
+}
+</script>
 
 <style>
 html {
@@ -24,32 +42,30 @@ html {
   margin: 0;
 }
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+.app {
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+.appContainer {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  grid-template-rows: auto
 }
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+.naviContainer {
+  grid-column: 1/2;
+  position: fixed;
+  top: 0;
+  overflow-y: auto;
+  width: 240px;
+  height: 100%;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+  overscroll-behavior: contain;
 }
 
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.mainContainer {
+  grid-column: 2/3
 }
+
 </style>

@@ -13,12 +13,15 @@
           Documentation
         </a>
         <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
+          href="./duplicate"
           class="button--grey"
         >
-          GitHub
+          duplicate check
         </a>
+        <nuxt-link ="@/duplicate"
+          class="button--grey">
+          duplicate check nuxt
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -26,7 +29,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import Logo from '~/components/Logo.vue'
+import Logo from '@/components/Logo.vue'
 
 export default Vue.extend({
   components: {

@@ -18,5 +18,28 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
+.
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+# システム構成
+
+- Vue
+- Nuxt
+- Vuetify
+
+# 起動方法
+
+初回起動（Docker, docker-compose.ymlを修正した場合もこちら。--buildを付けないとDockerイメージのキャッシュを使用してしまうため）
+$ docker-compose up --build
+
+２回目以降起動
+$ docker-compose up
+
+起動後、以下URLで開発中のアプリケーションを動作確認できます。
+http://localhost:3000 
+
+# IDE
+
+IDEはVisual Studio Codeを使用する。
+Remote Containersプラグインを入れることでDocker内の資源をRemoteできる
+
