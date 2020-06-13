@@ -43,3 +43,26 @@ http://localhost:3000
 IDEはVisual Studio Codeを使用する。
 Remote Containersプラグインを入れることでDocker内の資源をRemoteできる
 
+# Nuxtについて
+
+Nustは以下3つのタイプのシステムを構築できる。
+
+- SPA
+- SSR
+- 静的サイト
+
+今回は運用費削減のため静的サイトを生成する。
+3つのタイプについては実行時のコマンドで切り替えることができる
+https://ja.nuxtjs.org/guide/
+
+## SPA
+
+SSRしたくない場合はnuxt --spaを使うことでSPAサイトとして出力できる
+
+## SSR
+
+nuxtコマンドで生成できる。開発時はホットリロードもされる。
+
+## 静的サイトの作成方法
+
+静的サイトはnuxt generateコマンドを使うことでdistディレクトリ配下に生成される。

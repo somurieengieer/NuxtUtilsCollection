@@ -150,5 +150,4 @@ export default Vue.extend({
 </script>
 
 <style>
-
 </style>

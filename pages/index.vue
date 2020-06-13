@@ -38,7 +38,8 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<!-- scopedでスコープ指定しないと他の資源の同一class名の要素にも影響する -->
+<style scoped> 
 .container {
   margin: 0 auto;
   min-height: 100vh;

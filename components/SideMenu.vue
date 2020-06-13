@@ -19,14 +19,9 @@
         nav
         class="py-0"
       >
-        <v-list-item two-line :class="miniVariant && 'px-0'">
-          <v-list-item-avatar>
-            <img src="https://randomuser.me/api/portraits/men/81.jpg">
-          </v-list-item-avatar>
-
+        <v-list-item two-line :class="miniVariant && 'px-0'" :to="'/'">
           <v-list-item-content>
-            <v-list-item-title>Application</v-list-item-title>
-            <v-list-item-subtitle>Subtext</v-list-item-subtitle>
+            <p style="font-size: 1.5em;">ProcessGenerator</p>
           </v-list-item-content>
         </v-list-item>
 
@@ -36,6 +31,7 @@
           v-for="item in items"
           :key="item.title"
           link
+          :to="item.href"
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -56,9 +52,8 @@
       return {
         drawer: true,
         items: [
-          { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-          { title: 'Photos', icon: 'mdi-image' },
-          { title: 'About', icon: 'mdi-help-box' },
+          { title: '文字列比較', icon: 'mdi-hexagon-outline', href: '/duplicate' },
+          { title: 'dummy', icon: 'mdi-hexagon-outline', href: '/dummy' },
         ],
         color: 'primary',
         colors: [
