@@ -1,39 +1,27 @@
 <template>
   <div class="container">
     <div>
-      <logo />
       <h1 class="title">
-        NuxtUtilsCollection
+        Text Processor
       </h1>
       <h2 class="subtitle">
-        My world-class Nuxt.js project !!!YESaa!!
+        Powerful Processor to make your work easy
       </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="./duplicate"
-          class="button--grey"
-        >
-          duplicate check
-        </a>
+      <!-- <div class="links">
         <nuxt-link ="@/duplicate"
           class="button--grey">
           duplicate check nuxt
         </nuxt-link>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import Logo from '@/components/Logo.vue'
 
 export default Vue.extend({
   components: {
-    Logo
   }
 })
 </script>
