@@ -15,7 +15,11 @@
         </v-col>
       </v-row>
       <v-row>
-        <process-options />
+        <process-options 
+          :activeProcessList="processList"
+          @updated="calledParentMethod"
+        />
+        {{processList}}
       </v-row>
     </v-container>
     <!-- <process-text-area/> と書いても動く -->
@@ -25,7 +29,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import ProcessTextArea from '@/components/ProcessTextArea.vue'
-import ProcessOptions from '@/components/ProcessOptions.vue'
+import ProcessOptions, { ProcessItemType } from '@/components/ProcessOptions.vue'
 export default Vue.extend({
   components: {
     ProcessTextArea: ProcessTextArea,
@@ -36,8 +40,15 @@ export default Vue.extend({
       firstname: 'test-san',
       textValue1: 'test value1',
       textValue2: 'test value2',
+      processList: [],
     }
-  }
+  },
+  methods: {
+    calledParentMethod(processes: ProcessItemType[]) {
+      console.log("called Parent Method", processes)
+    },
+
+  },
 })
 </script>
 
