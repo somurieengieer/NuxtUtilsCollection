@@ -8,7 +8,7 @@
     <v-container>
       <v-row>
         <v-col>
-          <!-- v-modelを使うと:value="param1" @input="param1 = $event"を略すことができる -->
+          <!-- v-model（糖衣構文）を使うと:value="param1" @input="param1 = $event"を略すことができる -->
           <!-- 子はpropのvalueとして受け取り、設定することができる -->
           <process-text-area v-model="textValue1" />
         </v-col>
@@ -18,14 +18,14 @@
       </v-row>
       <v-row>
         <process-options 
-          :activeProcessList="processList"
+          v-model="processExecution"
           @updated="calledParentMethod"
         />
         {{textValue1}}
         {{textValue2}}
       </v-row>
       <v-row>
-        <!-- <v-btn rounded color="primary" dark v-on:clidk="">実行</v-btn> -->
+        <v-btn rounded color="primary" dark v-on:click="executeProcess">実行</v-btn>
         <v-btn rounded color="secondary" dark>クリア</v-btn>
       </v-row>
       <v-row>
@@ -55,7 +55,7 @@ export default Vue.extend({
       firstname: 'test-san',
       textValue1: 'test value1',
       textValue2: 'test value2',
-      processList: [],
+      processExecution: (text: string) => { return text },
       resultValue1: '',
       resultValue2: '',
     }
@@ -67,6 +67,12 @@ export default Vue.extend({
       this.resultValue1 = result
       console.log("called Parent Method", result)
     },
+    executeProcess() {
+      console.log(this.processExecution)
+      const result = this.processExecution(this.textValue1)
+      this.resultValue1 = result
+      console.log("executed. ", result)
+    }
 
   },
 })

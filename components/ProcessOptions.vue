@@ -56,7 +56,7 @@ type Computed = {
 
 }
 type Props = {
-  activeProcessList: ((text: string) => string)[]
+  value: ((text: string) => string)
 }
 
 const options: ThisTypedComponentOptionsWithRecordProps<
@@ -70,15 +70,10 @@ const options: ThisTypedComponentOptionsWithRecordProps<
     // this.canvas = process.browser
   },
   props: {
-    activeProcessList: {
+    value: {
       type: Object,
       required: true,
     },
-      // type: any[],
-      // type: ((text: string) => string)[],
-      // required: true,
-      // default: ''
-    // },
   },
   data() {
     return {
@@ -88,14 +83,15 @@ const options: ThisTypedComponentOptionsWithRecordProps<
   methods: {
     onChangeCheckBox(event: any): void {
       console.log('called onChangeInput')
-      const processExecution: (text: string) => string = (text: string) => {
+      // const processExecution: (text: string) => string = (text: string) => {
+      const processExecution = (text: string) => {
         const accum = this.activeProcesses
             .map(p => p.processes)
             .reduce((accum, current) => (input: string) => current(accum(input)))
         return accum(text)
       }
-      this.$emit("updated", processExecution)
-      this.$emit("value", processExecution)
+      // this.$emit("updated", processExecution)
+      this.$emit("input", processExecution)
       // this.commitChange(event.target.value)
     },
     setActiveProcesses(): void {
