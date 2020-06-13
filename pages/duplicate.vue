@@ -10,30 +10,40 @@
         <v-col>
           <!-- v-model（糖衣構文）を使うと:value="param1" @input="param1 = $event"を略すことができる -->
           <!-- 子はpropのvalueとして受け取り、設定することができる -->
-          <process-text-area v-model="textValue1" />
+          <process-text-area v-model="textValue1"
+            :placeholder="'値を入力してください'"
+          />
         </v-col>
         <v-col>
-          <process-text-area v-model="textValue2" />
+          <process-text-area v-model="textValue2"
+            :placeholder="'値を入力してください'"
+          />
         </v-col>
       </v-row>
       <v-row>
-        <process-options 
-          v-model="processExecution"
-          @updated="calledParentMethod"
-        />
-        {{textValue1}}
-        {{textValue2}}
+        <v-container class="px-0" fluid>
+          <!-- ma-1 -> m: margin, a: 全方向, 1: 1px -->
+          <v-checkbox v-for="(processOption, i) in processesOptions" 
+            v-model="processOption.value"
+            :key="i"
+            :label="processOption.label"
+            />
+        </v-container>
       </v-row>
       <v-row>
-        <v-btn rounded color="primary" dark v-on:click="executeProcess">実行</v-btn>
-        <v-btn rounded color="secondary" dark>クリア</v-btn>
+        <v-btn rounded v-on:click="executeProcess">実行</v-btn>
+        <v-btn rounded v-on:click="clear">クリア</v-btn>
       </v-row>
       <v-row>
         <v-col>
-          <process-text-area v-model="resultValue1" />
+          <process-text-area v-model="resultValue1"
+            :label="'左にのみ存在する値'"
+          />
         </v-col>
         <v-col>
-          <process-text-area v-model="resultValue2" />
+          <process-text-area v-model="resultValue2"
+            :label="'右にのみ存在する値'"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -44,18 +54,48 @@
 <script lang="ts">
 import Vue from 'vue'
 import ProcessTextArea from '@/components/ProcessTextArea.vue'
-import ProcessOptions, { ProcessItemType } from '@/components/ProcessOptions.vue'
+export type ProcessOptionType = {
+  label: string,
+  value: boolean,
+  processes: (ary: string) => string,
+}
+const processOptions: ProcessOptionType[] = [
+  {
+    label: 'ソート',
+    value: true,
+    processes: function(ary: string) { 
+     return ary.split('\n').sort().join('\n')
+    },
+  },
+  {
+    label: '重複行を削除',
+    value: true,
+    processes: function(aryStr: string) { 
+      const ary = aryStr.split('\n')
+      const resultAry: string[] = []
+      // console.log(aryStr.split('\n'))
+      // console.log(aryStr.indexOf('a'))
+      // console.log(aryStr.indexOf('bbbb'))
+      ary.forEach(text => !resultAry.includes(text) ? resultAry.push(text) : null)
+      // console.log(ary.filter((s, i) => ary.indexOf(s) === i))
+      console.log(resultAry)
+      return resultAry.join('\n')
+      // return aryStr.split('\n')
+          // .filter((s, i) => aryStr.indexOf(s) === i)
+          // .join('\n')
+    },
+  }
+]
 export default Vue.extend({
   components: {
     ProcessTextArea: ProcessTextArea,
-    ProcessOptions: ProcessOptions,
   },
   data: function () {
     return {
       firstname: 'test-san',
       textValue1: 'test value1',
       textValue2: 'test value2',
-      processExecution: (text: string) => { return text },
+      processesOptions: processOptions,
       resultValue1: '',
       resultValue2: '',
     }
@@ -68,13 +108,27 @@ export default Vue.extend({
       console.log("called Parent Method", result)
     },
     executeProcess() {
-      console.log(this.processExecution)
-      const result = this.processExecution(this.textValue1)
-      this.resultValue1 = result
-      console.log("executed. ", result)
-    }
-
+      const processExecution = (text: string) => {
+        const accum = this.activeProcesses
+            .map(p => p.processes)
+            .reduce((accum, current) => (input: string) => current(accum(input)))
+        return accum(text)
+      }
+      this.resultValue1 = processExecution(this.textValue1)
+      this.resultValue2 = processExecution(this.textValue2)
+    },
+    clear() {
+      this.textValue1 = ''
+      this.textValue2 = ''
+      this.resultValue1 = ''
+      this.resultValue2 = ''
+    },
   },
+  computed: {
+    activeProcesses(): ProcessOptionType[] {
+      return this.processesOptions.filter(p => p.value)
+    }
+  }
 })
 </script>
 

@@ -6,17 +6,14 @@
     <v-textarea
       v-model="value"
       :clearable=true
-      :label="'右の値Label'"
+      :label="label"
       :no-resize=true
-      :placeholder="'ここに入力してください'"
+      :placeholder="placeholder"
       :rounded="'rounded'"
       :rows="4"
       :outlined="true"
       v-on:change="onChangeText()"
     ></v-textarea>
-    <div class="mt-12 text-center">
-      Value: {{ value }}
-    </div>
   </v-sheet>
 </template>
 
@@ -24,6 +21,16 @@
   export default {
     props: {
       value: {
+        type: String,
+        required: false,
+        default: ''
+      },
+      label: {
+        type: String,
+        required: false,
+        default: 'ここに入力してください'
+      },
+      placeholder: {
         type: String,
         required: false,
         default: ''

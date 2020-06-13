@@ -1,22 +1,13 @@
 <template>
-    <v-container class="px-0" fluid>
-      <!-- ma-1 -> m: margin, a: 全方向, 1: 1px -->
-      <v-checkbox v-for="(process, i) in processes" 
-        v-model="process.value"
-        :key="i"
-        :label="process.label"
-        v-on:change="onChangeCheckBox()"
-        />
-      <!-- <v-checkbox
-        v-model="sort"
-        label="ソート"
-      ></v-checkbox>
-      <v-checkbox
-        v-model="distinct"
-        class="ma-1" 
-        label="重複行を削除"
-      ></v-checkbox> -->
-    </v-container>
+  <v-container class="px-0" fluid>
+    <!-- ma-1 -> m: margin, a: 全方向, 1: 1px -->
+    <v-checkbox v-for="(process, i) in processes" 
+      v-model="process.value"
+      :key="i"
+      :label="process.label"
+      v-on:change="onChangeCheckBox()"
+      />
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -56,7 +47,10 @@ type Computed = {
 
 }
 type Props = {
-  value: ((text: string) => string)
+  value: {
+    type: ((text: string) => string)
+    require: true,
+  },
 }
 
 const options: ThisTypedComponentOptionsWithRecordProps<
