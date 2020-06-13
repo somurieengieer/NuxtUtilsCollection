@@ -25,18 +25,20 @@ import { ThisTypedComponentOptionsWithRecordProps } from 'vue/types/options'
 export type ProcessItemType = {
   label: string,
   value: boolean,
-  processes: (ary: string[]) => string[],
+  processes: (ary: string) => string,
 }
 const processItems: ProcessItemType[] = [
   {
     label: 'ソート',
     value: true,
-    processes: function(ary: string[]) { return ary },
+    processes: function(ary: string) { 
+     return ary.split('\n').sort().join('\n')
+    },
   },
   {
     label: '重複行を削除',
     value: true,
-    processes: function(ary: string[]) { return ary },
+    processes: function(ary: string) { return ary + 2 },
   }
 ]
 
@@ -86,7 +88,14 @@ const options: ThisTypedComponentOptionsWithRecordProps<
   methods: {
     onChangeCheckBox(event: any): void {
       console.log('called onChangeInput')
-      this.$emit("updated", this.activeProcesses)
+      const processExecution: (text: string) => string = (text: string) => {
+        const accum = this.activeProcesses
+            .map(p => p.processes)
+            .reduce((accum, current) => (input: string) => current(accum(input)))
+        return accum(text)
+      }
+      this.$emit("updated", processExecution)
+      this.$emit("value", processExecution)
       // this.commitChange(event.target.value)
     },
     setActiveProcesses(): void {

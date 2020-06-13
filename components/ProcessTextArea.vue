@@ -12,6 +12,7 @@
       :rounded="'rounded'"
       :rows="4"
       :outlined="true"
+      v-on:change="onChangeText()"
     ></v-textarea>
     <div class="mt-12 text-center">
       Value: {{ value }}
@@ -27,6 +28,12 @@
         required: false,
         default: ''
       }
+    },
+    methods: {
+      onChangeText() {
+        console.log("call onChangeText")
+        this.$emit("input", this.value)
+      },
     }
   }
 </script>
