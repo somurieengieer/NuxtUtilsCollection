@@ -99,9 +99,8 @@ export default Vue.extend({
   },
   data: function () {
     return {
-      firstname: 'test-san',
-      textValue1: 'test value1',
-      textValue2: 'test value2',
+      textValue1: '',
+      textValue2: '',
       executedValue1: '',
       executedValue2: '',
       processesOptions: processOptions,
@@ -137,6 +136,8 @@ export default Vue.extend({
     clear() {
       this.textValue1 = ''
       this.textValue2 = ''
+      this.executedValue1 = ''
+      this.executedValue2 = ''
       this.resultValue1 = ''
       this.resultValue2 = ''
     },
