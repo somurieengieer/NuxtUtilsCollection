@@ -1,10 +1,5 @@
 <template>
   <div>
-    <div>
-      duplicate
-      {{firstname}}
-    </div>
-
     <v-container>
       <v-row>
         <v-col>
@@ -33,6 +28,18 @@
       <v-row>
         <v-btn rounded v-on:click="executeProcess">実行</v-btn>
         <v-btn rounded v-on:click="clear">クリア</v-btn>
+      </v-row>
+      <v-row>
+        <v-col>
+          <process-text-area v-model="executedValue1"
+            :label="'加工結果'"
+          />
+        </v-col>
+        <v-col>
+          <process-text-area v-model="executedValue2"
+            :label="'加工結果'"
+          />
+        </v-col>
       </v-row>
       <v-row>
         <v-col>
@@ -68,6 +75,13 @@ const processOptions: ProcessOptionType[] = [
     },
   },
   {
+    label: '行頭・行末の空白をトリミング',
+    value: true,
+    processes: function(ary: string) { 
+     return ary.split('\n').map(s => s.trim()).join('\n')
+    },
+  },
+  {
     label: '重複行を削除',
     value: true,
     processes: function(aryStr: string) { 
@@ -76,13 +90,6 @@ const processOptions: ProcessOptionType[] = [
       ary.forEach(text => !resultAry.includes(text) ? resultAry.push(text) : null)
       console.log(resultAry)
       return resultAry.join('\n')
-    },
-  },
-  {
-    label: '行頭・行末の空白をトリミング',
-    value: true,
-    processes: function(ary: string) { 
-     return ary.split('\n').map(s => s.trim()).join('\n')
     },
   },
 ]
@@ -95,6 +102,8 @@ export default Vue.extend({
       firstname: 'test-san',
       textValue1: 'test value1',
       textValue2: 'test value2',
+      executedValue1: '',
+      executedValue2: '',
       processesOptions: processOptions,
       resultValue1: '',
       resultValue2: '',
@@ -114,8 +123,16 @@ export default Vue.extend({
             .reduce((accum, current) => (input: string) => current(accum(input)))
         return accum(text)
       }
-      this.resultValue1 = processExecution(this.textValue1)
-      this.resultValue2 = processExecution(this.textValue2)
+      const existsOnlyOneSide = (aryStr: string, aryStrBase: string): string => {
+        const aryBase = aryStrBase.split('\n')
+        return aryStr.split('\n')
+            .filter(str => !aryBase.includes(str))
+            .join('\n')
+      }
+      this.executedValue1 = processExecution(this.textValue1)
+      this.executedValue2 = processExecution(this.textValue2)
+      this.resultValue1 = existsOnlyOneSide(this.executedValue1, this.executedValue2)
+      this.resultValue2 = existsOnlyOneSide(this.executedValue2, this.executedValue1)
     },
     clear() {
       this.textValue1 = ''
