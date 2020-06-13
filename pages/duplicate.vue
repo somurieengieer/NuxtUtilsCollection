@@ -73,18 +73,18 @@ const processOptions: ProcessOptionType[] = [
     processes: function(aryStr: string) { 
       const ary = aryStr.split('\n')
       const resultAry: string[] = []
-      // console.log(aryStr.split('\n'))
-      // console.log(aryStr.indexOf('a'))
-      // console.log(aryStr.indexOf('bbbb'))
       ary.forEach(text => !resultAry.includes(text) ? resultAry.push(text) : null)
-      // console.log(ary.filter((s, i) => ary.indexOf(s) === i))
       console.log(resultAry)
       return resultAry.join('\n')
-      // return aryStr.split('\n')
-          // .filter((s, i) => aryStr.indexOf(s) === i)
-          // .join('\n')
     },
-  }
+  },
+  {
+    label: '行頭・行末の空白をトリミング',
+    value: true,
+    processes: function(ary: string) { 
+     return ary.split('\n').map(s => s.trim()).join('\n')
+    },
+  },
 ]
 export default Vue.extend({
   components: {
