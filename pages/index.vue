@@ -7,6 +7,11 @@
       <h2 class="subtitle">
         Powerful Processor to make your work easy
       </h2>
+      <br />
+      <h2 class="subtitle">
+        テキストの加工・比較をするサービスです<br />
+        サイドメニューからサービスを選んでください
+      </h2>
       <!-- <div class="links">
         <nuxt-link ="@/duplicate"
           class="button--grey">

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <v-app>
     <div class="appContainer">
       <div class="naviContainer">
         <side-menu/>
@@ -8,7 +8,7 @@
         <nuxt />
       </div>
     </div>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -65,7 +65,8 @@ html {
 }
 
 .mainContainer {
-  grid-column: 2/3
+  grid-column: 2/3;
+  padding: 30px;
 }
 
 </style>

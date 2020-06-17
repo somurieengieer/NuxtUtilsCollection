@@ -1,5 +1,29 @@
 <template>
   <div>
+    <div>
+      <v-container fluid fill-height>
+      <v-card
+        class="mx-auto"
+        width="100%"
+        outlined
+        color="primary"
+        light
+      >
+        <v-card-text>
+          <div dark>
+            <p class="display-1 text--primary">
+              左右文字列比較
+            </p>
+          </div>
+          <div class="text--primary">
+            左右の文字列を比較するサービスです。<br />
+            左右の文字列を加工し、夫々にのみ存在する値を抽出します。
+          </div>
+        </v-card-text>
+      </v-card>
+      </v-container>
+    </div>
+
     <v-container>
       <v-row>
         <v-col>

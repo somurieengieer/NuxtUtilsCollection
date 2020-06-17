@@ -52,7 +52,7 @@
       return {
         drawer: true,
         items: [
-          { title: '文字列比較', icon: 'mdi-hexagon-outline', href: '/duplicate' },
+          { title: '左右文字列比較', icon: 'mdi-hexagon-outline', href: '/duplicate' },
           { title: 'dummy', icon: 'mdi-hexagon-outline', href: '/dummy' },
         ],
         color: 'primary',

@@ -1,8 +1,4 @@
 <template>
-  <v-sheet
-    elevation="24"
-    class="pa-12"
-  >
     <v-textarea
       v-model="value"
       :clearable=true
@@ -14,7 +10,6 @@
       :outlined="true"
       v-on:change="onChangeText()"
     ></v-textarea>
-  </v-sheet>
 </template>
 
 <script>
