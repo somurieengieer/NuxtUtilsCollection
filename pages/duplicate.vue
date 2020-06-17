@@ -7,10 +7,10 @@
         width="100%"
         outlined
         color="primary"
-        light
+        dark
       >
         <v-card-text>
-          <div dark>
+          <div>
             <p class="display-1 text--primary">
               左右文字列比較
             </p>
@@ -50,8 +50,8 @@
         </v-container>
       </v-row>
       <v-row>
-        <v-btn rounded v-on:click="executeProcess">実行</v-btn>
-        <v-btn rounded v-on:click="clear">クリア</v-btn>
+        <v-btn color="accent" rounded v-on:click="executeProcess">実行</v-btn>
+        <v-btn color="accent" rounded v-on:click="clear">クリア</v-btn>
       </v-row>
       <v-row>
         <v-col>
