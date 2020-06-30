@@ -53,6 +53,7 @@
         drawer: true,
         items: [
           { title: '左右文字列比較', icon: 'mdi-hexagon-outline', href: '/duplicate' },
+          { title: 'JSONフォーマット', icon: 'mdi-hexagon-outline', href: '/json_format' },
           { title: 'dummy', icon: 'mdi-hexagon-outline', href: '/dummy' },
         ],
         color: 'primary',
