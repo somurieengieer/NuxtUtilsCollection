@@ -1,28 +1,7 @@
 <template>
   <div>
-    <div>
-      <v-container fluid fill-height>
-      <v-card
-        class="mx-auto"
-        width="100%"
-        outlined
-        color="primary"
-        dark
-      >
-        <v-card-text>
-          <div>
-            <p class="display-1 text--primary">
-              左右文字列比較
-            </p>
-          </div>
-          <div class="text--primary">
-            左右の文字列を比較するサービスです。<br />
-            左右の文字列を加工し、夫々にのみ存在する値を抽出します。
-          </div>
-        </v-card-text>
-      </v-card>
-      </v-container>
-    </div>
+    <content-header :title="'左右文字列比較'"
+      :description="'左右の文字列を比較するサービスです。左右の文字列を加工し、夫々にのみ存在する値を抽出します。'" />
 
     <v-container>
       <v-row>
@@ -85,6 +64,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import ProcessTextArea from '@/components/ProcessTextArea.vue'
+import ContentHeader from '@/components/ContentHeader.vue'
 export type ProcessOptionType = {
   label: string,
   value: boolean,
@@ -120,6 +100,7 @@ const processOptions: ProcessOptionType[] = [
 export default Vue.extend({
   components: {
     ProcessTextArea: ProcessTextArea,
+    ContentHeader: ContentHeader,
   },
   data: function () {
     return {

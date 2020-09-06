@@ -18,8 +18,28 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
-.
 
+# 拡張機能
+
+vetur: .vue内に記述するHTMLやJavaScriptの補完、シンタックスハイライト。必須
+brackets pair colorizer: カッコ毎に色を分けてハイライト。VueやNuxtで(){}のネストを多用してもOK
+beautify: 整形。javascriptやJSON, CSS, Sass, HTMLコードを選択し、command palletからBeautifyを実行すると綺麗に整えてくれます。
+
+code runnner: VSCode内から各種対応言語やcommandを実行。デバッグもできる
+Vue.peek: 選択したコンポーネントやファイル名について、「Vueファイルのどこで定義されたか」や「定義しているコード」を表示。F12でコンポーネントが開くようになる
+duplicate acition: VSCode内で簡単にファイルやディレクトリの複製が可能になる
+Vue docs: Vue.jsやVuex, Vue Router, Vue SSR, Vuetify, Nuxt.js, VuePressの公式ドキュメントをVSCode内から直接参照
+
+参考
+https://qiita.com/kyohei_ai/items/aeddc6a179ea3a464ed5
+
+# ショートカットキー
+
+## 移動
+
+F12: コンポーネントを開く（Vue.peek）
+opt+F12: コンポーネントをツールチップっぽく参照（Vue.peek）
+^-: 前に戻る
 
 # システム構成
 
@@ -67,3 +87,4 @@ nuxtコマンドで生成できる。開発時はホットリロードもされ�
 ## 静的サイトの作成方法
 
 静的サイトはnuxt generateコマンドを使うことでdistディレクトリ配下に生成される。
+

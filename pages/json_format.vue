@@ -1,27 +1,7 @@
 <template>
   <div>
-    <div>
-      <v-container fluid fill-height>
-      <v-card
-        class="mx-auto"
-        width="100%"
-        outlined
-        color="primary"
-        dark
-      >
-        <v-card-text>
-          <div>
-            <p class="display-1 text--primary">
-              JSONフォーマット
-            </p>
-          </div>
-          <div class="text--primary">
-            JSONのフォーマットを行うサービスです。<br />
-          </div>
-        </v-card-text>
-      </v-card>
-      </v-container>
-    </div>
+    <content-header :title="'JSONフォーマット'"
+      :description="'JSONのフォーマットを行うサービスです。'" />
 
     <v-container>
       <v-row>
@@ -72,6 +52,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import ProcessTextArea from '@/components/ProcessTextArea.vue'
+import ContentHeader from '@/components/ContentHeader.vue'
 export type ProcessOptionType = {
   label: string,
   value: boolean,
@@ -115,6 +96,7 @@ const processOptions: ProcessOptionType[] = [
 export default Vue.extend({
   components: {
     ProcessTextArea: ProcessTextArea,
+    ContentHeader: ContentHeader,
   },
   data: function () {
     return {
