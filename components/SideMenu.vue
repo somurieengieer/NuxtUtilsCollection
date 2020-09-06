@@ -12,7 +12,6 @@
       :permanent="permanent"
       :src="bg"
       absolute
-      dark
     >
       <v-list
         dense
@@ -56,14 +55,7 @@
           { title: 'JSONフォーマット', icon: 'mdi-hexagon-outline', href: '/json_format' },
           { title: 'dummy', icon: 'mdi-hexagon-outline', href: '/dummy' },
         ],
-        color: 'primary',
-        colors: [
-          'primary',
-          'blue',
-          'success',
-          'red',
-          'teal',
-        ],
+        color: '#9BD8F3',
         right: false,
         permanent: true,
         miniVariant: false,

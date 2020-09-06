@@ -6,7 +6,7 @@ Vue.use(Vuetify);
 export default new Vuetify({
   iconfont: 'md',
   theme: {
-    primary: '#FFAB50',
+    primary: '#9BD8F3',
     secondary: '#45DC5F',
     accent: '#565DD2',
     error: colors.red.base,
