@@ -4,9 +4,6 @@
     <v-card
       class="mx-auto"
       width="100%"
-      outlined
-      color="primary"
-      dark
     >
       <v-card-text>
         <div>
