@@ -62,6 +62,10 @@ http://localhost:3000
 
 IDEはVisual Studio Codeを使用する。
 Remote Containersプラグインを入れることでDocker内の資源をRemoteできる
+(左下部の「Open Folder in Container」でこのリポジトリのルートを選択すればOK)
+
+## プラグイン
+
 Veturプラグインは毎回消えるので入れ直す（入れ直さないとコードに色が付かずに読みづらい）
 
 # Nuxtについて
