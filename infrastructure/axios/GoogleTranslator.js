@@ -2,8 +2,8 @@ import axios from "axios";
 const BASE_URL = 'https://script.google.com/macros/s/AKfycbxmebaYjY2Prc0LnDNhMQZSwKkqjPl4D62Sp07rUHzTXF3XEjQ/exec'
 
 // ====================================================
-// axios/GoogleScript使用時のメモ
-// GoogleScriptのCORSの設定が必要。
+// axios/GoogleAppsScript使用時のメモ
+// GoogleAppsScriptのCORSの設定が必要。
 // Webアプリケーションとして導入...の後、Who has access to the appの選択肢を
 //   Anyone, even anonymousにする。（全ユーザーだとNG）
 // ====================================================

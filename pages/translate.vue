@@ -1,25 +1,34 @@
 <template>
   <div>
-    <flex-big-text-box :value="originText" @input="originText = $event" />
-    <flex-big-text-box :value="translator.translatedText" />
-    <flex-big-text-box :value="translator.reTranslatedText" />
+    <content-header :title="'二重翻訳'"
+      :description="'翻訳・再翻訳するサービスです。'" />
+
+    <div class="flexParent">
+      <flex-big-text-box class="flexChild" title="翻訳する日本語" :value="originText" @input="originText = $event" />
+    </div>
     <div>
-      <button class="normalButton" @click="translate">Translate</button>
+      <button class="normalButton" @click="translate">翻訳</button>
+    </div>
+    <div class="flexParent">
+      <flex-big-text-box class="flexChild" title="翻訳された英語" :disabled="true" :value="translator.translatedText" />
+      <flex-big-text-box class="flexChild" title="再翻訳された日本語" :disabled="true" :value="translator.reTranslatedText" />
     </div>
   </div>
 </template>
 
 <script>
+import ContentHeader from '@/components/ContentHeader.vue'
 import FlexBigTextBox from '@/components/FlexBigTextBox.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
+    ContentHeader,
     FlexBigTextBox
   },
   data: function() {
     return {
-      originText: '初期値はこんにちは'
+      originText: '翻訳したい文章をここに入力してください。'
     }
   },
   updated: function() {
@@ -49,5 +58,12 @@ export default {
   background-color: #ccccff;
   padding: 0.4em 1em;
   border-radius: 10px;
+}
+.flexParent {
+    display: flex;
+    justify-content: flex-start;
+}
+.flexChild {
+   flex-grow: 1;
 }
 </style>
