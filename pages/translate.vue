@@ -1,8 +1,8 @@
 <template>
   <div>
-    <flex-big-text-box :text="originText" />
-    <flex-big-text-box :text="translator.translatedText" />
-    <flex-big-text-box :text="reTranslatedText" />
+    <flex-big-text-box :value="originText" @input="originText = $event" />
+    <flex-big-text-box :value="translator.translatedText" />
+    <flex-big-text-box :value="translator.reTranslatedText" />
     <div>
       <button class="normalButton" @click="translate">Translate</button>
     </div>
@@ -19,36 +19,34 @@ export default {
   },
   data: function() {
     return {
-      originText: '初期値はこんにちは',
-      // englishText: '',
-      reTranslatedText: ''
+      originText: '初期値はこんにちは'
     }
   },
+  updated: function() {
+    console.log('updated')
+  },
   computed: {
-    // originText: function() {
-      // console.log(this.$store)
-      // console.log(this.$store.state.translator.originText)
-      
-      // return this.$store.state.translator.originText
-    // }
-    ...mapGetters({ translator: 'translator/texts'})
+    ...mapGetters({ translator: 'translator/texts' })
     // 以下の書き方でもOK
     // translatedText: function() {
-      // return this.$store.getters['translator/translatedText'] // ↓こっちでもOK
-      // return this.$store.state.translator.translatedText
+    // return this.$store.getters['translator/translatedText'] // ↓こっちでもOK
+    // return this.$store.state.translator.translatedText
     // }
   },
   methods: {
     translate: function() {
-      this.$store.dispatch('translator/translate', { originText: this.originText } )
+      console.log('this', this)
+      this.$store.dispatch('translator/translate', {
+        originText: this.originText
+      })
     }
-  },
+  }
 }
 </script>
 
 <style scoped>
-.normalButton{ 
-  background-color: #CCCCFF;
+.normalButton {
+  background-color: #ccccff;
   padding: 0.4em 1em;
   border-radius: 10px;
 }

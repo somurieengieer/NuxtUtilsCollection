@@ -21,14 +21,14 @@ $ npm run generate
 
 # 拡張機能
 
-vetur: .vue内に記述するHTMLやJavaScriptの補完、シンタックスハイライト。必須
-brackets pair colorizer: カッコ毎に色を分けてハイライト。VueやNuxtで(){}のネストを多用してもOK
-beautify: 整形。javascriptやJSON, CSS, Sass, HTMLコードを選択し、command palletからBeautifyを実行すると綺麗に整えてくれます。
+vetur: .vue 内に記述する HTML や JavaScript の補完、シンタックスハイライト。必須
+brackets pair colorizer: カッコ毎に色を分けてハイライト。Vue や Nuxt で(){}のネストを多用しても OK
+beautify: 整形。javascript や JSON, CSS, Sass, HTML コードを選択し、command pallet から Beautify を実行すると綺麗に整えてくれます。
 
-code runnner: VSCode内から各種対応言語やcommandを実行。デバッグもできる
-Vue.peek: 選択したコンポーネントやファイル名について、「Vueファイルのどこで定義されたか」や「定義しているコード」を表示。F12でコンポーネントが開くようになる
-duplicate acition: VSCode内で簡単にファイルやディレクトリの複製が可能になる
-Vue docs: Vue.jsやVuex, Vue Router, Vue SSR, Vuetify, Nuxt.js, VuePressの公式ドキュメントをVSCode内から直接参照
+code runnner: VSCode 内から各種対応言語や command を実行。デバッグもできる
+Vue.peek: 選択したコンポーネントやファイル名について、「Vue ファイルのどこで定義されたか」や「定義しているコード」を表示。F12 でコンポーネントが開くようになる
+duplicate acition: VSCode 内で簡単にファイルやディレクトリの複製が可能になる
+Vue docs: Vue.js や Vuex, Vue Router, Vue SSR, Vuetify, Nuxt.js, VuePress の公式ドキュメントを VSCode 内から直接参照
 
 参考
 https://qiita.com/kyohei_ai/items/aeddc6a179ea3a464ed5
@@ -49,46 +49,46 @@ opt+F12: コンポーネントをツールチップっぽく参照（Vue.peek）
 
 # 起動方法
 
-初回起動（Docker, docker-compose.ymlを修正した場合もこちら。--buildを付けないとDockerイメージのキャッシュを使用してしまうため）
-$ docker-compose up --build
+初回起動（Docker, docker-compose.yml を修正した場合もこちら。--build を付けないと Docker イメージのキャッシュを使用してしまうため）
+\$ docker-compose up --build
 
 ２回目以降起動
-$ docker-compose up
+\$ docker-compose up
 
-起動後、以下URLで開発中のアプリケーションを動作確認できます。
-http://localhost:3000 
+起動後、以下 URL で開発中のアプリケーションを動作確認できます。
+http://localhost:3000
 
 # IDE
 
-IDEはVisual Studio Codeを使用する。
-Remote Containersプラグインを入れることでDocker内の資源をRemoteできる
-(左下部の「Open Folder in Container」でこのリポジトリのルートを選択すればOK)
+IDE は Visual Studio Code を使用する。
+Remote Containers プラグインを入れることで Docker 内の資源を Remote できる
+(左下部の「Open Folder in Container」でこのリポジトリのルートを選択すれば OK)
 
 ## プラグイン
 
-Veturプラグインは毎回消えるので入れ直す（入れ直さないとコードに色が付かずに読みづらい）
+- Vetur プラグインは毎回消えるので入れ直す（入れ直さないとコードに色が付かずに読みづらい）
+- Prettier プラグインも同様。自動フォーマット用で必須。特に設定しないでも入れれば.js .vue に適用される
 
-# Nuxtについて
+# Nuxt について
 
-Nustは以下3つのタイプのシステムを構築できる。
+Nust は以下 3 つのタイプのシステムを構築できる。
 
 - SPA
 - SSR
 - 静的サイト
 
 今回は運用費削減のため静的サイトを生成する。
-3つのタイプについては実行時のコマンドで切り替えることができる
+3 つのタイプについては実行時のコマンドで切り替えることができる
 https://ja.nuxtjs.org/guide/
 
 ## SPA
 
-SSRしたくない場合はnuxt --spaを使うことでSPAサイトとして出力できる
+SSR したくない場合は nuxt --spa を使うことで SPA サイトとして出力できる
 
 ## SSR
 
-nuxtコマンドで生成できる。開発時はホットリロードもされる。
+nuxt コマンドで生成できる。開発時はホットリロードもされる。
 
 ## 静的サイトの作成方法
 
-静的サイトはnuxt generateコマンドを使うことでdistディレクトリ配下に生成される。
-
+静的サイトは nuxt generate コマンドを使うことで dist ディレクトリ配下に生成される。

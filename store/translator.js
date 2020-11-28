@@ -1,28 +1,41 @@
+import { translateFromJapanese, translateFromEnglish } from '../infrastructure/axios/GoogleTranslator'
 const state = () => ({
-  originText: 'こんにちは',
   translatedText: '',
   reTranslatedText: ''
 })
 
 const getters = {
   texts: (state, getters, rootState) => {
-    return state;
+    return state
   }
 }
 
 const actions = {
-  translate ({ commit, state }, payload) {
-    console.log('payload is ' + payload)
-    commit('setOriginText', payload)
+
+  /**
+   * payload format is as follows
+   * const payload = { originText: '翻訳したい元の言葉' }
+   */
+  async translate({ commit, state }, payload) {
+
+    const originText = payload.originText
+    if (!originText) return;
+
+    const translatedText = await translateFromJapanese(originText)
+    commit('setTranslatedText', { updatedText: translatedText } )
+    if (!translatedText) return;
+
+    const reTranslatedText = await translateFromEnglish(translatedText)
+    commit('setReTranslatedText', { updatedText: reTranslatedText } )
   }
 }
 
 const mutations = {
-  setOriginText (state, { originText }) {
-    state.originText = originText
-    state.translatedText = state.originText + 'translated'
-    state.reTranslatedText = state.translatedText + 'translated'
-    console.log('updatedText: ' + originText)
+  setTranslatedText(state, { updatedText }) {
+    state.translatedText = updatedText
+  },
+  setReTranslatedText(state, { updatedText }) {
+    state.reTranslatedText = updatedText
   }
 }
 

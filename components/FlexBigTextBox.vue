@@ -1,6 +1,9 @@
 <template>
-<textarea :rows="rows" :cols="cols" v-model="text" class="textarea">
-</textarea>
+  <textarea :rows="rows" :cols="cols" 
+  @input="$emit('input', $event.target.value)"
+  class="textarea" >
+  {{ value }}
+  </textarea>
 </template>
 
 <script lang="ts">
@@ -14,7 +17,7 @@ export default {
     }
   },
   props: {
-    text: {
+    value: {
       type: String,
       required: true,
     }
