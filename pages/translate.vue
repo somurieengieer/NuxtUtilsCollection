@@ -1,17 +1,41 @@
 <template>
   <div>
-    <content-header :title="'二重翻訳'"
-      :description="'翻訳・再翻訳するサービスです。'" />
+    <content-header
+      :title="'二重翻訳'"
+      :description="'翻訳・再翻訳するサービスです。'"
+    />
+
+    <div>
+      <input type="radio" id="ja" value="ja" v-model="originLanguage" />
+      <label for="ja">日本語→英語</label>
+      <input type="radio" id="en" value="en" v-model="originLanguage" />
+      <label for="en">英語→日本語</label>
+    </div>
 
     <div class="flexParent">
-      <flex-big-text-box class="flexChild" title="翻訳する日本語" :value="originText" @input="originText = $event" />
+      <flex-big-text-box
+        class="flexChild"
+        :title="`翻訳する${originLabel}`"
+        :value="originText"
+        @input="originText = $event"
+      />
     </div>
     <div>
       <button class="normalButton" @click="translate">翻訳</button>
     </div>
     <div class="flexParent">
-      <flex-big-text-box class="flexChild" title="翻訳された英語" :disabled="true" :value="translator.translatedText" />
-      <flex-big-text-box class="flexChild" title="再翻訳された日本語" :disabled="true" :value="translator.reTranslatedText" />
+      <flex-big-text-box
+        class="flexChild"
+        :title="`翻訳された${targetLabel}`"
+        :disabled="true"
+        :value="translator.translatedText"
+      />
+      <flex-big-text-box
+        class="flexChild"
+        :title="`再翻訳された${originLabel}`"
+        :disabled="true"
+        :value="translator.reTranslatedText"
+      />
     </div>
   </div>
 </template>
@@ -28,25 +52,29 @@ export default {
   },
   data: function() {
     return {
-      originText: '翻訳したい文章をここに入力してください。'
+      originText: '翻訳したい文章をここに入力してください。',
+      originLanguage: 'ja'
     }
   },
-  updated: function() {
-    console.log('updated')
-  },
   computed: {
-    ...mapGetters({ translator: 'translator/texts' })
+    ...mapGetters({ translator: 'translator/texts' }),
     // 以下の書き方でもOK
     // translatedText: function() {
     // return this.$store.getters['translator/translatedText'] // ↓こっちでもOK
     // return this.$store.state.translator.translatedText
     // }
+    originLabel: function() {
+      return this.originLanguage === 'ja' ? '日本語' : '英語'
+    },
+    targetLabel: function() {
+      return this.originLanguage !== 'ja' ? '日本語' : '英語'
+    }
   },
   methods: {
     translate: function() {
-      console.log('this', this)
       this.$store.dispatch('translator/translate', {
-        originText: this.originText
+        originText: this.originText,
+        originLanguage: this.originLanguage
       })
     }
   }
@@ -60,10 +88,10 @@ export default {
   border-radius: 10px;
 }
 .flexParent {
-    display: flex;
-    justify-content: flex-start;
+  display: flex;
+  justify-content: flex-start;
 }
 .flexChild {
-   flex-grow: 1;
+  flex-grow: 1;
 }
 </style>

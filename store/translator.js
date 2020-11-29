@@ -1,4 +1,7 @@
-import { translateFromJapanese, translateFromEnglish } from '../infrastructure/axios/GoogleTranslator'
+import {
+  translateFromJapanese,
+  translateFromEnglish
+} from '../infrastructure/axios/GoogleTranslator'
 const state = () => ({
   translatedText: '',
   reTranslatedText: ''
@@ -11,22 +14,26 @@ const getters = {
 }
 
 const actions = {
-
   /**
    * payload format is as follows
-   * const payload = { originText: '翻訳したい元の言葉' }
+   * const payload = { originText: '翻訳したい元の言葉', originLanguage: 'ja' }
+   * originLanguage is 'ja' or 'en'
    */
   async translate({ commit, state }, payload) {
-
     const originText = payload.originText
-    if (!originText) return;
+    const originLanguage = payload.originLanguage
+    if (!originText || !originLanguage) return
 
-    const translatedText = await translateFromJapanese(originText)
-    commit('setTranslatedText', { updatedText: translatedText } )
-    if (!translatedText) return;
+    const translateMethod =
+      originLanguage === 'ja' ? translateFromJapanese : translateFromEnglish
+    const translatedText = await translateMethod(originText)
+    commit('setTranslatedText', { updatedText: translatedText })
+    if (!translatedText) return
 
-    const reTranslatedText = await translateFromEnglish(translatedText)
-    commit('setReTranslatedText', { updatedText: reTranslatedText } )
+    const reTranslateMethod =
+      originLanguage === 'ja' ? translateFromEnglish : translateFromJapanese
+    const reTranslatedText = await reTranslateMethod(translatedText)
+    commit('setReTranslatedText', { updatedText: reTranslatedText })
   }
 }
 
