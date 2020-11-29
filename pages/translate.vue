@@ -5,7 +5,7 @@
       :description="'翻訳・再翻訳するサービスです。'"
     />
 
-    <div>
+    <div class="radioArea">
       <input type="radio" id="ja" value="ja" v-model="originLanguage" />
       <label for="ja">日本語→英語</label>
       <input type="radio" id="en" value="en" v-model="originLanguage" />
@@ -82,6 +82,9 @@ export default {
 </script>
 
 <style scoped>
+.radioArea {
+  margin: 0.2em 0.5em;
+}
 .normalButton {
   background-color: #ccccff;
   padding: 0.4em 1em;
