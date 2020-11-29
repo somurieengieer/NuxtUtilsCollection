@@ -1,5 +1,6 @@
-import axios from "axios";
-const BASE_URL = 'https://script.google.com/macros/s/AKfycbxmebaYjY2Prc0LnDNhMQZSwKkqjPl4D62Sp07rUHzTXF3XEjQ/exec'
+import axios from 'axios'
+const BASE_URL =
+  'https://script.google.com/macros/s/AKfycbxmebaYjY2Prc0LnDNhMQZSwKkqjPl4D62Sp07rUHzTXF3XEjQ/exec'
 
 // ====================================================
 // axios/GoogleAppsScript使用時のメモ
@@ -16,7 +17,7 @@ const urlFromGetParameter = (baseUrl, params) => {
 }
 
 const axiosFrom = async (url) => {
-  const res =  await axios.get(url).then(
+  const res = await axios.get(url).then(
     (res) => {
       if (res.status !== 200) {
         console.log('res is not 200: ', res)
@@ -32,20 +33,18 @@ const axiosFrom = async (url) => {
   return res
 }
 
-export async function translateFromJapanese(originalText) {
+/**
+ * source should be 'ja' or 'en'
+ */
+export async function translateFrom(sourceText, sourceLanguage) {
   const params = {
-    text: originalText,
-    source: 'ja',
-    target: 'en'
+    text: sourceText,
+    source: sourceLanguage,
+    target: targetLanguageFrom(sourceLanguage)
   }
   return await axiosFrom(urlFromGetParameter(BASE_URL, params))
 }
 
-export async function translateFromEnglish(originalText) {
-  const params = {
-    text: originalText,
-    source: 'en',
-    target: 'ja'
-  }
-  return await axiosFrom(urlFromGetParameter(BASE_URL, params))
+export function targetLanguageFrom(sourceLanguage) {
+  return sourceLanguage === 'ja' ? 'en' : 'ja'
 }
