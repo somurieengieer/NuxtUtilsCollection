@@ -1,8 +1,8 @@
 export default {
   namespaced: true,
-  state: {
+  state: () => ({
     isBusy: false
-  },
+  }),
   getters: {},
   mutations: {
     setBusy(state, val) {
