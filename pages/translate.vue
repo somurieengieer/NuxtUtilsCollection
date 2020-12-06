@@ -15,7 +15,7 @@
     <div class="flexParent">
       <flex-big-text-box
         class="flexChild"
-        :title="`翻訳する${originLabel}`"
+        :title="`翻訳したい文章をここに入力してください。`"
         :value="originText"
         @input="originText = $event"
       />
@@ -52,7 +52,7 @@ export default {
   },
   data() {
     return {
-      originText: '翻訳したい文章をここに入力してください。',
+      originText: '',
       originLanguage: 'ja'
     }
   },
