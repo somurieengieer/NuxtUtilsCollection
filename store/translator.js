@@ -2,6 +2,7 @@ import {
   translateFrom,
   targetLanguageFrom
 } from '../infrastructure/axios/GoogleTranslator'
+import { showSpinnerDuringAsync } from './loading.js'
 
 const state = () => ({
   translatedText: '',
@@ -21,21 +22,22 @@ const actions = {
    * originLanguage is 'ja' or 'en'
    */
   async translate({ commit, dispatch }, payload) {
-    dispatch('loading/setBusy', null, { root: true })
+    await showSpinnerDuringAsync(dispatch, async function() {
+      const originText = payload.originText
+      const originLanguage = payload.originLanguage
+      if (!originText || !originLanguage) return
 
-    const originText = payload.originText
-    const originLanguage = payload.originLanguage
-    if (!originText || !originLanguage) return
+      const translatedText = await translateFrom(originText, originLanguage)
+      commit('setTranslatedText', { updatedText: translatedText })
+      if (!translatedText) return
 
-    const translatedText = await translateFrom(originText, originLanguage)
-    commit('setTranslatedText', { updatedText: translatedText })
-    if (!translatedText) return
-
-    const targetLanguage = targetLanguageFrom(originLanguage)
-    const reTranslatedText = await translateFrom(translatedText, targetLanguage)
-    commit('setReTranslatedText', { updatedText: reTranslatedText })
-
-    dispatch('loading/resetBusy', null, { root: true })
+      const targetLanguage = targetLanguageFrom(originLanguage)
+      const reTranslatedText = await translateFrom(
+        translatedText,
+        targetLanguage
+      )
+      commit('setReTranslatedText', { updatedText: reTranslatedText })
+    })
   }
 }
 

@@ -18,3 +18,9 @@ export default {
     }
   }
 }
+
+export const showSpinnerDuringAsync = async (dispatch, handler) => {
+  dispatch('loading/setBusy', null, { root: true })
+  await handler()
+  dispatch('loading/resetBusy', null, { root: true })
+}
