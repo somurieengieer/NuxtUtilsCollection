@@ -6,9 +6,9 @@
     />
 
     <div class="radioArea">
-      <input type="radio" id="ja" value="ja" v-model="originLanguage" />
+      <input id="ja" v-model="originLanguage" type="radio" value="ja" />
       <label for="ja">日本語→英語</label>
-      <input type="radio" id="en" value="en" v-model="originLanguage" />
+      <input id="en" v-model="originLanguage" type="radio" value="en" />
       <label for="en">英語→日本語</label>
     </div>
 
@@ -41,16 +41,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import ContentHeader from '@/components/ContentHeader.vue'
 import FlexBigTextBox from '@/components/FlexBigTextBox.vue'
-import { mapGetters } from 'vuex'
 
 export default {
   components: {
     ContentHeader,
     FlexBigTextBox
   },
-  data: function() {
+  data() {
     return {
       originText: '翻訳したい文章をここに入力してください。',
       originLanguage: 'ja'
@@ -63,15 +63,15 @@ export default {
     // return this.$store.getters['translator/translatedText'] // ↓こっちでもOK
     // return this.$store.state.translator.translatedText
     // }
-    originLabel: function() {
+    originLabel() {
       return this.originLanguage === 'ja' ? '日本語' : '英語'
     },
-    targetLabel: function() {
+    targetLabel() {
       return this.originLanguage !== 'ja' ? '日本語' : '英語'
     }
   },
   methods: {
-    translate: function() {
+    translate() {
       this.$store.dispatch('translator/translate', {
         originText: this.originText,
         originLanguage: this.originLanguage

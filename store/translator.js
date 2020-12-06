@@ -2,13 +2,14 @@ import {
   translateFrom,
   targetLanguageFrom
 } from '../infrastructure/axios/GoogleTranslator'
+
 const state = () => ({
   translatedText: '',
   reTranslatedText: ''
 })
 
 const getters = {
-  texts: (state, getters, rootState) => {
+  texts: (state) => {
     return state
   }
 }
@@ -19,7 +20,9 @@ const actions = {
    * const payload = { originText: '翻訳したい元の言葉', originLanguage: 'ja' }
    * originLanguage is 'ja' or 'en'
    */
-  async translate({ commit, state }, payload) {
+  async translate({ commit, dispatch }, payload) {
+    dispatch('loading/setBusy', null, { root: true })
+
     const originText = payload.originText
     const originLanguage = payload.originLanguage
     if (!originText || !originLanguage) return
@@ -31,6 +34,8 @@ const actions = {
     const targetLanguage = targetLanguageFrom(originLanguage)
     const reTranslatedText = await translateFrom(translatedText, targetLanguage)
     commit('setReTranslatedText', { updatedText: reTranslatedText })
+
+    dispatch('loading/resetBusy', null, { root: true })
   }
 }
 

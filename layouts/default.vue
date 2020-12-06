@@ -2,22 +2,25 @@
   <v-app>
     <div class="appContainer">
       <div class="naviContainer">
-        <side-menu/>
+        <side-menu />
       </div>
       <div class="mainContainer">
         <nuxt />
       </div>
     </div>
+    <loading-spinner />
   </v-app>
 </template>
 
 <script>
 import SideMenu from '@/components/SideMenu'
+import LoadingSpinner from '@/components/LoadingSpinner'
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    SideMenu
+    SideMenu,
+    LoadingSpinner
   }
 }
 </script>
@@ -50,7 +53,7 @@ html {
 .appContainer {
   display: grid;
   grid-template-columns: 240px 1fr;
-  grid-template-rows: auto
+  grid-template-rows: auto;
 }
 
 .naviContainer {
@@ -68,5 +71,4 @@ html {
   grid-column: 2/3;
   padding: 30px;
 }
-
 </style>
