@@ -22,6 +22,8 @@ const actions = {
    * originLanguage is 'ja' or 'en'
    */
   async translate({ commit, dispatch }, payload) {
+    commit('setTranslatedText', { updatedText: '' })
+    commit('setReTranslatedText', { updatedText: '' })
     await showSpinnerDuringAsync(dispatch, async function() {
       console.log('before replace', payload.originText)
       console.log('after replace', payload.originText.replace('\n', ' \n'))
@@ -30,7 +32,9 @@ const actions = {
       if (!originText || !originLanguage) return
 
       const translatedText = await translateFrom(originText, originLanguage)
-      commit('setTranslatedText', { updatedText: translatedText })
+      commit('setTranslatedText', {
+        updatedText: translatedText || 'Internal Error'
+      })
       if (!translatedText) return
 
       const targetLanguage = targetLanguageFrom(originLanguage)
@@ -38,7 +42,9 @@ const actions = {
         translatedText,
         targetLanguage
       )
-      commit('setReTranslatedText', { updatedText: reTranslatedText })
+      commit('setReTranslatedText', {
+        updatedText: reTranslatedText || 'Internal Error'
+      })
     })
   }
 }

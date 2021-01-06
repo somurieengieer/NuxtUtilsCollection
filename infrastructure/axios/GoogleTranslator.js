@@ -17,7 +17,7 @@ const urlFromGetParameter = (baseUrl, params) => {
 }
 
 const axiosFrom = async (url) => {
-  const res = await axios.get(url).then(
+  const res = await axios.get(url, { timeout: 5000 }).then(
     (res) => {
       if (res.status !== 200) {
         console.log('res is not 200: ', res)
