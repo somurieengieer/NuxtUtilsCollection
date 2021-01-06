@@ -23,7 +23,9 @@ const actions = {
    */
   async translate({ commit, dispatch }, payload) {
     await showSpinnerDuringAsync(dispatch, async function() {
-      const originText = payload.originText
+      console.log('before replace', payload.originText)
+      console.log('after replace', payload.originText.replace('\n', ' \n'))
+      const originText = payload.originText.replace(/\n/g, ` \n`)
       const originLanguage = payload.originLanguage
       if (!originText || !originLanguage) return
 
