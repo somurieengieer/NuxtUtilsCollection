@@ -1,12 +1,13 @@
 <template>
   <v-container class="px-0" fluid>
     <!-- ma-1 -> m: margin, a: 全方向, 1: 1px -->
-    <v-checkbox v-for="(process, i) in processes" 
-      v-model="process.value"
+    <v-checkbox
+      v-for="(process, i) in processes"
       :key="i"
+      v-model="process.value"
       :label="process.label"
-      v-on:change="onChangeCheckBox()"
-      />
+      @change="onChangeCheckBox()"
+    />
   </v-container>
 </template>
 
@@ -14,22 +15,27 @@
 import { ThisTypedComponentOptionsWithRecordProps } from 'vue/types/options'
 
 export type ProcessItemType = {
-  label: string,
-  value: boolean,
-  processes: (ary: string) => string,
+  label: string
+  value: boolean
+  processes: (ary: string) => string
 }
 const processItems: ProcessItemType[] = [
   {
     label: 'ソート',
     value: true,
-    processes: function(ary: string) { 
-     return ary.split('\n').sort().join('\n')
-    },
+    processes(ary: string) {
+      return ary
+        .split('\n')
+        .sort()
+        .join('\n')
+    }
   },
   {
     label: '重複行を削除',
     value: true,
-    processes: function(ary: string) { return ary + 2 },
+    processes(ary: string) {
+      return ary + 2
+    }
   }
 ]
 
@@ -44,13 +50,12 @@ type Methods = {
 type Computed = {
   execProcesses: number
   activeProcesses: ProcessItemType[]
-
 }
 type Props = {
   value: {
-    type: ((text: string) => string)
-    require: true,
-  },
+    type: (text: string) => string
+    require: true
+  }
 }
 
 const options: ThisTypedComponentOptionsWithRecordProps<
@@ -66,8 +71,8 @@ const options: ThisTypedComponentOptionsWithRecordProps<
   props: {
     value: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
@@ -80,29 +85,27 @@ const options: ThisTypedComponentOptionsWithRecordProps<
       // const processExecution: (text: string) => string = (text: string) => {
       const processExecution = (text: string) => {
         const accum = this.activeProcesses
-            .map(p => p.processes)
-            .reduce((accum, current) => (input: string) => current(accum(input)))
+          .map((p) => p.processes)
+          .reduce((accum, current) => (input: string) => current(accum(input)))
         return accum(text)
       }
       // this.$emit("updated", processExecution)
-      this.$emit("input", processExecution)
+      this.$emit('input', processExecution)
       // this.commitChange(event.target.value)
     },
     setActiveProcesses(): void {
       // this.$parent.activeProcessList = this.activeProcesses()
-    },
+    }
   },
   computed: {
     execProcesses(): number {
       return 3
     },
     activeProcesses(): ProcessItemType[] {
-      return this.processes.filter(p => p.value)
+      return this.processes.filter((p) => p.value)
     }
   }
 }
 
-
 export default options
 </script>
-

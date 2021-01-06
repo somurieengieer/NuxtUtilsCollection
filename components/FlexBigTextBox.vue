@@ -2,26 +2,26 @@
   <div class="root">
     <div>
       <span>{{ title }}</span>
+      <common-button :name="'コピー'" :size="'small'" @click="copyText" />
     </div>
-  <textarea :rows="rows" 
-  @input="$emit('input', $event.target.value)"
-  :placeholder="title"
-  :disabled="disabled"
-  class="textarea" >
-  {{ value }}
-  </textarea>
+    <textarea
+      ref="textElm"
+      v-model="value"
+      :rows="rows"
+      :placeholder="title"
+      :disabled="disabled"
+      class="textarea"
+      @input="$emit('input', $event.target.value)"
+    >
+    </textarea>
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
+import CommonButton from '@/components/CommonButton.vue'
 export default {
-  data: function() {
-    return {
-
-    rows: 8,
-    cols: 20,
-    }
+  components: {
+    CommonButton
   },
   props: {
     title: {
@@ -30,11 +30,23 @@ export default {
     },
     value: {
       type: String,
-      required: true,
+      required: true
     },
     disabled: {
       type: Boolean,
-      required: false,
+      required: false
+    }
+  },
+  data() {
+    return {
+      rows: 8,
+      cols: 20
+    }
+  },
+  methods: {
+    copyText() {
+      this.$refs.textElm.select()
+      document.execCommand('Copy')
     }
   }
 }
@@ -45,7 +57,7 @@ export default {
   padding: 0.4em;
 }
 .textarea {
-  border: 1px solid #AAA;
+  border: 1px solid #aaa;
   width: 100%;
 }
 </style>

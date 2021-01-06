@@ -27,13 +27,13 @@
       <flex-big-text-box
         class="flexChild"
         :title="`翻訳された${targetLabel}`"
-        :disabled="true"
+        :disabled="false"
         :value="translator.translatedText"
       />
       <flex-big-text-box
         class="flexChild"
         :title="`再翻訳された${originLabel}`"
-        :disabled="true"
+        :disabled="false"
         :value="translator.reTranslatedText"
       />
     </div>
