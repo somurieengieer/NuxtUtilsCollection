@@ -6,7 +6,7 @@
     </div>
     <textarea
       ref="textElm"
-      v-model="value"
+      :value="value"
       :rows="rows"
       :placeholder="title"
       :disabled="disabled"
