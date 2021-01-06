@@ -6,10 +6,10 @@
     />
 
     <div class="radioArea">
-      <input id="ja" v-model="originLanguage" type="radio" value="ja" />
-      <label for="ja">日本語→英語</label>
       <input id="en" v-model="originLanguage" type="radio" value="en" />
       <label for="en">英語→日本語</label>
+      <input id="ja" v-model="originLanguage" type="radio" value="ja" />
+      <label for="ja">日本語→英語</label>
     </div>
 
     <div class="flexParent">
@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       originText: '',
-      originLanguage: 'ja'
+      originLanguage: 'en'
     }
   },
   computed: {
